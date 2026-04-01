@@ -1,0 +1,14 @@
+{
+  "$schema": "https://raw.githubusercontent.com/byAlek/portfolio/refs/heads/main/config.schema.json",
+  "project_type": "landing-page",
+  "status": "completed",
+  "description": {
+    "en": "Positivus is a free Figma landing page template with a bold, modern design, ideal for agencies and digital projects.",
+    "es": "Positivus es una plantilla gratuita de landing page en Figma, con un diseño moderno y llamativo, ideal para agencias y proyectos digitales.",
+    "pt-br": "Positivus é um template gratuito de landing page no Figma, com design moderno e ousado, ideal para agências e projetos digitais."
+  },
+  "technologies": {
+    "frontend": ["react", "astro", "typescript", "tailwindcss"]
+  },
+  "featured": true
+}
