@@ -1,0 +1,81 @@
+---
+import '@/styles/global.css'
+
+import { HeaderNavModal } from '@/components/header-nav-modal'
+import { ClientRouter } from 'astro:transitions'
+import { Link } from '@/components/ui/link'
+import Logo from '@/components/ui/logo.astro'
+import { ThemeButton } from '@/components/theme-button'
+
+type Props = {
+  navMap: {
+    href: string
+    label: string
+  }[]
+}
+const { navMap } = Astro.props as Props
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Positivus" />
+    <link rel="manifest" href="/favicon/site.webmanifest" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Positivus</title>
+    <ClientRouter />
+  </head>
+  <body>
+    <header class="py-4">
+      <nav class="flex items-center">
+        <Logo class="text-foreground mr-auto" />
+        <HeaderNavModal client:load navMap={navMap} className="xl:hidden" />
+        <ul class="hidden items-center gap-4 xl:flex">
+          <li>
+            <ThemeButton client:load className="hidden xl:inline-flex" />
+          </li>
+          {
+            navMap.map(({ href, label }, i) => (
+              <li>
+                <Link href={href} variant={i === navMap.length - 1 ? 'outline' : 'link'}>
+                  {label}
+                </Link>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </header>
+    <slot />
+  </body>
+</html>
+<script>
+  import { theme, type Theme } from '@/components/theme-button'
+  import { initScrollLock } from '@/lib/scroll-lock'
+  import { effect } from '@preact/signals'
+
+  document.addEventListener('astro:page-load', () => {
+    initScrollLock()
+
+    const savedTheme = localStorage.getItem('theme') as Theme | null
+
+    if (savedTheme) theme.value = savedTheme
+
+    effect(() => {
+      localStorage.setItem('theme', theme.value)
+      document.body.className = theme.value
+    })
+  })
+</script>

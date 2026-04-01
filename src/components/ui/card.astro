@@ -1,0 +1,29 @@
+---
+import { cn } from '@/lib/utils'
+import { cva, type VariantProps } from 'class-variance-authority'
+
+const cardVariants = cva('rounded-[calc(16px+32px)] border p-8 shadow-[0px_8px_#000] md:p-16', {
+  variants: {
+    color: {
+      primary: 'bg-primary text-primary-foreground',
+      secondary: 'bg-secondary text-secondary-foreground shadow-secondary/70',
+      muted: 'bg-muted text-muted-foreground',
+    },
+  },
+  defaultVariants: {
+    color: 'primary',
+  },
+})
+
+type Props = {
+  render?: keyof astroHTML.JSX.DefinedIntrinsicElements
+  className?: string
+} & astroHTML.JSX.HTMLAttributes &
+  VariantProps<typeof cardVariants>
+
+const { color, className, render: Render = 'div', ...props } = Astro.props
+---
+
+<Render class={cn(cardVariants({ color, className }))} {...props}>
+  <slot>Card</slot>
+</Render>

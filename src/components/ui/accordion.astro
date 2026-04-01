@@ -1,0 +1,38 @@
+---
+import Card from './card.astro'
+
+type Props = {
+  open?: boolean
+}
+const { open = false } = Astro.props
+---
+
+<Card
+  color="muted"
+  className="group has-[.trigger:checked]:bg-primary! has-[.trigger:checked]:text-primary-foreground has-[.trigger:focus-visible]:bg-secondary/20 has-[label:hover]:hover:bg-secondary/20 overflow-hidden transition-colors duration-500"
+>
+  <label class="accordion-label flex cursor-pointer items-center select-none">
+    <input type="checkbox" class="trigger size-0 overflow-hidden" checked={open} />
+    <slot name="label">Label</slot>
+    <span
+      aria-hidden="true"
+      class:list={[
+        'bg-muted text-muted-foreground animate-out spin-out-180 fill-mode-forwards group-has-[.trigger:checked]:animate-in group-has-[.trigger:checked]:spin-in-180 pointer-events-none relative ml-auto size-14 shrink-0 rounded-full border border-current duration-300 select-none',
+        'after:absolute after:top-1/2 after:left-1/2 after:h-4/10 after:w-1.5 after:-translate-x-1/2 after:-translate-y-1/2 after:bg-current',
+        'before:absolute before:top-1/2 before:left-1/2 before:h-1.5 before:w-4/10 before:-translate-x-1/2 before:-translate-y-1/2 before:bg-current',
+        'after:opacity-100 after:transition-opacity after:duration-300 group-has-[.trigger:checked]:after:opacity-0',
+      ]}
+    >
+    </span>
+  </label>
+
+  <div
+    class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-in-out group-has-[.trigger:checked]:grid-rows-[1fr]"
+  >
+    <div
+      class="border-primary-foreground/40 animate-out fade-out-0 group-has-[.trigger:checked]:animate-in group-has-[.trigger:checked]:fade-in-0 overflow-hidden transition-[padding,margin,border] duration-300 group-has-[.trigger:checked]:mt-4 group-has-[.trigger:checked]:border-t group-has-[.trigger:checked]:pt-4 md:group-has-[.trigger:checked]:mt-8 md:group-has-[.trigger:checked]:pt-8"
+    >
+      <slot>Content</slot>
+    </div>
+  </div>
+</Card>

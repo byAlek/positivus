@@ -1,0 +1,112 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --spacing-layout: 1280px;
+  --color-primary: var(--color-primary);
+  --color-primary-foreground: var(--color-primary-foreground);
+  --color-secondary: var(--color-secondary);
+  --color-secondary-foreground: var(--color-secondary-foreground);
+  --color-muted: var(--color-muted);
+  --color-muted-foreground: var(--color-muted-foreground);
+  --color-background: var(--color-background);
+  --color-foreground: var(--color-foreground);
+  --color-border: var(--color-border);
+}
+
+@layer base {
+  :root {
+    --color-primary: #b9ff66;
+    --color-primary-foreground: #000;
+    --color-secondary: #191a23;
+    --color-secondary-foreground: #fff;
+    --color-muted: #f3f3f3;
+    --color-muted-foreground: #3a3a3a;
+    --color-background: #fff;
+    --color-foreground: #000;
+  }
+
+  .light {
+    --color-primary: #b9ff66;
+    --color-primary-foreground: #000;
+    --color-secondary: #191a23;
+    --color-secondary-foreground: #fff;
+    --color-muted: #f3f3f3;
+    --color-muted-foreground: #3a3a3a;
+    --color-background: #fff;
+    --color-foreground: #000;
+  }
+  .dark {
+    --color-primary: #b9ff66;
+    --color-primary-foreground: #000;
+    --color-secondary: #fff;
+    --color-secondary-foreground: #000000;
+    --color-muted: #252525;
+    --color-muted-foreground: #c9c9c9;
+    --color-background: #000000;
+    --color-foreground: #ffffff;
+  }
+
+  * {
+    @apply border-current/90 ring-current outline-none;
+  }
+  html {
+    scroll-behavior: smooth;
+    @apply scroll-pt-4;
+  }
+  body {
+    @apply bg-background text-foreground max-w-layout mx-auto px-4;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  body.modal-open {
+    @apply pointer-events-none overflow-hidden;
+  }
+  svg {
+    @apply pointer-events-none size-5;
+  }
+  span {
+    font-size: inherit;
+    line-height: inherit;
+  }
+  p {
+    @apply text-p;
+  }
+  h4 {
+    @apply text-h4;
+  }
+  h3 {
+    @apply text-h3;
+  }
+  h2 {
+    @apply text-h2;
+  }
+  h1 {
+    @apply text-h1;
+  }
+}
+@utility rounded-layout {
+  @apply rounded-[14px];
+}
+@utility focus-ring {
+  @apply rounded-layout focus-visible:ring-4;
+}
+@utility gutter {
+  scrollbar-gutter: stable;
+}
+@utility text-p {
+  @apply text-base lg:text-lg;
+}
+@utility text-h4 {
+  @apply text-lg font-semibold lg:text-xl;
+}
+@utility text-h3 {
+  @apply text-[26px] leading-[32px] font-semibold lg:text-3xl;
+}
+@utility text-h2 {
+  @apply text-3xl font-semibold sm:text-4xl lg:text-[40px];
+}
+@utility text-h1 {
+  @apply text-[43px] font-semibold lg:text-6xl;
+}
